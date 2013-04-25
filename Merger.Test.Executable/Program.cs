@@ -54,7 +54,7 @@ namespace Merger.Test.Executable
             foreach (var conflict in result.Conflicts)
             {
                 // destination is the old value in the database
-                Console.WriteLine("User changing {0} from {1} to {2}", conflict.PropertyName, conflict.DestinationValue, conflict.SourceValue);
+                Console.WriteLine("User changing {0} from {1} to {2}", conflict.PropertyName, conflict.DestinationValue ?? "null", conflict.SourceValue ?? "null");
             }
 
             WaitForUser();

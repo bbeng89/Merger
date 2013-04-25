@@ -107,12 +107,12 @@ namespace Merger.Test.Unit
             //Test a null source and a destination with a value
             var conflicts = merger.CompareAlgorithm.Compare(instance1, instance2);
             var conflict = conflicts.First(c => c.PropertyName == "Property3");
-            Assert.AreEqual("null", conflict.SourceValue);
+            Assert.IsNull(conflict.SourceValue);
 
             //Test a source with a value and a null destination
             conflicts = merger.CompareAlgorithm.Compare(instance3, instance4);
             conflict = conflicts.First(c => c.PropertyName == "Property3");
-            Assert.AreEqual("null", conflict.DestinationValue);
+            Assert.IsNull(conflict.DestinationValue);
         }
 
         [TestMethod]
