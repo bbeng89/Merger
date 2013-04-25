@@ -77,7 +77,8 @@ namespace Merger
             var areEqual = _softComparer.Equals(sourceProperty, destinationProperty);
 
             if (!areEqual)
-                conflict = new Conflict(Name, sourceProperty.ToString(), destinationProperty.ToString());
+                conflict = new Conflict(Name, sourceProperty != null ? sourceProperty.ToString() : "null", 
+                    destinationProperty != null ? destinationProperty.ToString() : "null");
             else
                 conflict = null;
 

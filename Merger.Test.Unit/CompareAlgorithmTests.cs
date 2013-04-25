@@ -72,6 +72,50 @@ namespace Merger.Test.Unit
         }
 
         [TestMethod]
+        public void Compare_NullValueConflicts()
+        {
+            var instance1 = new MergeTestObject()
+            {
+                Property1 = 1,
+                Property2 = 1,
+                Property3 = null
+            };
+
+            var instance2 = new MergeTestObject()
+            {
+                Property1 = 2,
+                Property2 = 2,
+                Property3 = "bar"
+            };
+
+            var instance3 = new MergeTestObject()
+            {
+                Property1 = 1,
+                Property2 = 1,
+                Property3 = "foo"
+            };
+
+            var instance4 = new MergeTestObject()
+            {
+                Property1 = 2,
+                Property2 = 2,
+                Property3 = null
+            };
+
+            var merger = MergerHelper.CreateMerger();
+
+            //Test a null source and a destination with a value
+            var conflicts = merger.CompareAlgorithm.Compare(instance1, instance2);
+            var conflict = conflicts.First(c => c.PropertyName == "Property3");
+            Assert.AreEqual("null", conflict.SourceValue);
+
+            //Test a source with a value and a null destination
+            conflicts = merger.CompareAlgorithm.Compare(instance3, instance4);
+            conflict = conflicts.First(c => c.PropertyName == "Property3");
+            Assert.AreEqual("null", conflict.DestinationValue);
+        }
+
+        [TestMethod]
         public void IgnoreProperty_IgnoredPropertiesDontHaveConflicts()
         {
             var instance1 = new MergeTestObject()

@@ -11,6 +11,9 @@ namespace Merger.Test.Executable
 
         public string Property1 { get; set; }
         public int Property2 { get; set; }
+        public string Property3 { get { return "test"; } }
+        public string Property4 { get; set; }
+        public string Property5 { get; set; }
     }
 
     class Program
@@ -24,14 +27,18 @@ namespace Merger.Test.Executable
             {
                 Id = key,
                 Property1 = "foo",
-                Property2 = 1
+                Property2 = 1,
+                Property4 = null,
+                Property5 = "qux"
             };
 
             var fromView = new TestObject()
             {
                 Id = key,
                 Property1 = "bar",
-                Property2 = 1
+                Property2 = 1,
+                Property4 = "baz",
+                Property5 = null
             };
 
             // create object that matches TestObject instances on Id things (usually want to make this into a singleton)
